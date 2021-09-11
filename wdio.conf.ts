@@ -4,7 +4,9 @@ import { Config } from "@wdio/sync";
 export const config: Config = {
     runner: 'local',
     specs: [
-        './test/**/*.ts'
+        // './test/**/*.ts'
+        // './test/mocha.ts'
+        './test/createAccount.ts'
     ],
     hostname: process.env.SELENIUM_HUB_HOST ?? 'localhost',
     path: '/wd/hub',
@@ -14,7 +16,7 @@ export const config: Config = {
     }],
     // Level of logging verbosity: trace | debug | info | warn | error | silent
     logLevel: 'info',
-    baseUrl: 'http://ip-5236.sunline.net.ua:38015/',
+    baseUrl: 'https://parabank.parasoft.com',
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
@@ -22,6 +24,8 @@ export const config: Config = {
     reporters: ['spec'],
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000,
+        // retries: 3,
+        // grep: '@SMOKE' // запустить тесты, где в имени указан паттерн @SMOKE
     }
 }
