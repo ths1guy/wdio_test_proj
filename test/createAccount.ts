@@ -1,25 +1,29 @@
-import { CreateAccount } from "../page/createAccount.page";
+// import { CreateAccount } from "../page/createAccount.page"; // не нужен после создания аггрегатора
+import { APP } from "../page/application";
 
 describe('User', () => {
     it('can register', () => {
         console.time("Test 'can register' took");
 
-        const createAccount = new CreateAccount();
+        // const createAccount = new CreateAccount(); // убираем после того, как экспортировали не класс, а его instance
+        APP.CreateAccount.open(); // скажет открыть страницу
+        const email = `Test${new Date().getTime() / 1000}@test.com`; // лучше разнести логику и сделать генерацию здесь
 
-        browser.url('/parabank/register.htm') // открываем страницу аккаунта
-        const registrationForm = $('#customerForm') // поиск элемента по css селектору
-        registrationForm.$("[name='customer.firstName']").setValue('Name1') // setValue печатает в элемент
-        registrationForm.$("[name='customer.lastName']").setValue('Last name2') // setValue печатает в элемент
-        registrationForm.$("[name='customer.address.street']").setValue('Tsentralna') 
-        registrationForm.$("[name='customer.address.city']").setValue('Odesa') 
-        registrationForm.$("[name='customer.address.state']").setValue('Obl') 
-        registrationForm.$("[name='customer.address.zipCode']").setValue('001002') 
-        registrationForm.$("[name='customer.ssn']").setValue('1231243ZASDVB1231') 
-        registrationForm.$("[name='customer.username']").setValue('qwetdkfmbgklwmhbek') 
-        registrationForm.$("[name='customer.password']").setValue('L123!zcvv') 
-        registrationForm.$("[name='repeatedPassword']").setValue('L123!zcvv') 
+        APP.CreateAccount.fillWith({ // передаем наши тестовые данные
+            firstName: "Name1",
+            lastName: "LastName1",
+            street: "Tsentralna",
+            city: "Odesa",
+            state: "Odeska",
+            zip: "001002",
+            ssn: "1231243ZASDVB1231",
+            username: "Amanbek",
+            // email: email,
+            password: email,
+            confirmPassword: email
+        });
 
-        registrationForm.$('input[type="submit"]').click()
+        APP.CreateAccount.confirmRegistration()
 
         const expectedText = 'This username already exists.'
 
