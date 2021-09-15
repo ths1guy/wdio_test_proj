@@ -7,18 +7,18 @@ export class CreateAccountPO {
     // Если я объявляю какие то элементы  и хочу их использовать между методами
     // я должен их завернуть в геттер
     public get registrationForm() {
-        return $('#customerForm') 
+        return $('#customerForm')
     }
 
     confirmRegistration() {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
         this.registrationForm.$('input[type="submit"]').click()
 
     }
     // options - параметр, далее через двоеточие - его тип, т.е. что должно в нем содержаться
     // в данном случае должен содержаться объект
     fillWith(options: { firstName: string; lastName: string; street: string; city: string; state: string; zip: string; ssn: string; username: string; password: string; confirmPassword: string; }) {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
 
         this.registrationForm.$("[name='customer.firstName']").setValue(options.firstName) // setValue печатает в элемент
         this.registrationForm.$("[name='customer.lastName']").setValue(options.lastName) // setValue печатает в элемент

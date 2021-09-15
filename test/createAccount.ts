@@ -3,12 +3,12 @@ import { APP } from "../page/application";
 import { createNewUserAndLogin } from "../utils/createUser";
 
 describe('User', () => {
-    it('can register', () => {
+    it.only('can register', () => {
         console.time("Test 'can register' took");
 
         // const createAccount = new CreateAccount(); // убираем после того, как экспортировали не класс, а его instance
         APP.CreateAccount.open(); // скажет открыть страницу
-        const email = `Test${new Date().getTime() / 1000}@test.com`; // лучше разнести логику и сделать генерацию здесь
+        // const email = `Test${new Date().getTime() / 1000}@test.com`; // лучше разнести логику и сделать генерацию здесь
 
         APP.CreateAccount.fillWith({ // передаем наши тестовые данные
             firstName: "Name1",
@@ -20,8 +20,8 @@ describe('User', () => {
             ssn: "1231243ZASDVB1231",
             username: "Amanbek",
             // email: email,
-            password: email,
-            confirmPassword: email
+            password: "12345",
+            confirmPassword: "12345"
         });
 
         APP.CreateAccount.confirmRegistration()
@@ -41,7 +41,7 @@ describe('User', () => {
 
         // создаем тест для регистрации пользователя
         
-        it.only("register user through http", () => { // only запустит только этот тест
+        it("register user through http", () => { // only запустит только этот тест
             const user = createNewUserAndLogin();
         });
         console.timeEnd("Test 'can register' took");
@@ -72,7 +72,7 @@ describe('User', () => {
         console.timeEnd("JS registration");
 
         // custom commands
-        it.only("custom commands", function() {
+        it("custom commands", function() {
             browser.addCommand("wait and click", function() {
                 // 'this' is return value of $(selector)
                 this.waitForDisplayed();

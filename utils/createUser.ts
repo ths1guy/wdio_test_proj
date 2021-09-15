@@ -1,6 +1,6 @@
 const request = require("request-promise-native");
 const faker = require("faker");
-const cheerio = request("cheerio");
+const cheerio = require("cheerio");
 
 export function createNewUserAndLogin() {
     console.time("Create and login user took: ");
